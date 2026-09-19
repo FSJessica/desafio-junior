@@ -1,0 +1,1 @@
+# helper de resposta padronizada (ver seção abaixo)

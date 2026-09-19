@@ -1,0 +1,1 @@
+# "banco de dados" em memória (ver seção abaixo)

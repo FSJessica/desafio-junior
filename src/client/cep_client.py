@@ -1,0 +1,1 @@
+# chamada HTTP à API pública de CEP (ex: ViaCEP)

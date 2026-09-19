@@ -1,0 +1,2 @@
+# configurações (Pydantic BaseSettings)
+

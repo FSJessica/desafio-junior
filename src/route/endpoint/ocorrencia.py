@@ -1,0 +1,1 @@
+# endpoints HTTP (fino: só valida e orquestra)

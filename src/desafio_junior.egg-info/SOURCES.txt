@@ -1,0 +1,16 @@
+README.md
+pyproject.toml
+src/client/cep_client.py
+src/config/settings.py
+src/desafio_junior.egg-info/PKG-INFO
+src/desafio_junior.egg-info/SOURCES.txt
+src/desafio_junior.egg-info/dependency_links.txt
+src/desafio_junior.egg-info/requires.txt
+src/desafio_junior.egg-info/top_level.txt
+src/manager/ocorrencia_manager.py
+src/model/repository.py
+src/model/schema/ocorrencia.py
+src/route/api.py
+src/route/endpoint/ocorrencia.py
+src/tests/test_ocorrencia.py
+src/utils/json_response.py
