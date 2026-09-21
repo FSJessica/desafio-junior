@@ -1,4 +1,6 @@
 import pytest
+import json
+from pathlib import Path
 
 from src.app import app as flask_app
 
@@ -21,3 +23,9 @@ def mock_consultar_cep(monkeypatch):
     monkeypatch.setattr(
         "src.manager.ocorrencia_manager.consultar_cep", fake_consultar_cep
     )
+
+@pytest.fixture
+def ocorrencia_payload():
+    caminho = Path(__file__).parent / "resources" / "ocorrencia_payload.json"
+    with open(caminho, encoding="utf-8") as arquivo:
+        return json.load(arquivo)
