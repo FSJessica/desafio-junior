@@ -15,7 +15,8 @@ def criar_ocorrencia():
     try:
         dados = OcorrenciaInputSchema(**request.get_json())
     except ValidationError as erro:
-        return json_response.error(str(erro), status=400)
+        mensagens = [item["msg"].removeprefix('Value error, ') for item in erro.errors()]
+        return json_response.error("; ".join(mensagens), status=400)
 
     try:
         ocorrencia = ocorrencia_manager.criar_ocorrencia(dados)
@@ -28,3 +29,12 @@ def criar_ocorrencia():
 def listar_ocorrencias(placa):
     ocorrencias = ocorrencia_manager.listar_ocorrencias(placa)
     return json_response.success(ocorrencias, status=200)
+
+@ocorrencia_bp.route("/ocorrencia/<ocorrencia_id>", methods=["DELETE"])
+def deletar_ocorrencia(ocorrencia_id):
+    removido = ocorrencia_manager.deletar_ocorrencia(ocorrencia_id)
+
+    if not removido:
+        return json_response.error("Ocorrência não encontrada", status=404)
+
+    return json_response.success({"id": ocorrencia_id}, status=200)

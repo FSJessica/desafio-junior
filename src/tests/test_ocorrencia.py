@@ -55,3 +55,20 @@ def test_create_ocorrencia_cep_nao_encontrado(client, ocorrencia_payload, monkey
     assert response.status_code == 400
     assert response.get_json()["success"] is False
 
+def test_deletar_ocorrencia(client, ocorrencia_payload):
+    """Teste: ocorrência é removida com sucesso e some da listagem."""
+    criacao = client.post("/ocorrencia", json=ocorrencia_payload)
+    ocorrencia_id = criacao.get_json()["data"]["id"]
+
+    resposta = client.delete(f"/ocorrencia/{ocorrencia_id}")
+
+    assert resposta.status_code == 200
+    assert resposta.get_json()["success"] is True
+
+
+def test_deletar_ocorrencia_inexistente(client):
+    """Teste: deletar um id que não existe retorna 404."""
+    resposta = client.delete("/ocorrencia/id-que-nao-existe")
+
+    assert resposta.status_code == 404
+    assert resposta.get_json()["success"] is False

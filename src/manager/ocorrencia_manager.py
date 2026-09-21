@@ -29,3 +29,6 @@ def criar_ocorrencia(dados: OcorrenciaInputSchema) -> dict:
 
 def listar_ocorrencias(placa: str) -> list[dict]:
     return repository.listar_por_placa(placa)
+
+def deletar_ocorrencia(ocorrencia_id: str) -> bool:
+    return repository.remover_por_id(ocorrencia_id)
