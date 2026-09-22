@@ -1,7 +1,0 @@
-client
-config
-manager
-model
-route
-tests
-utils

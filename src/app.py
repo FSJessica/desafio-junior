@@ -1,14 +1,11 @@
 # cria e sobe a aplicação Flask
 
 from flask import Flask
+from src.route.api import registrar_rotas
 
 app = Flask(__name__)
 
-
-@app.route('/')
-def hello_world():  # put application's code here
-    return 'Hello World!'
-
+registrar_rotas(app)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
