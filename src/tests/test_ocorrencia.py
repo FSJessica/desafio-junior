@@ -18,6 +18,7 @@ def test_create_ocorrencia_tipo_invalido(client, ocorrencia_payload):
 
     assert response.status_code == 400
     assert response.get_json()["success"] is False
+    assert response.get_json()["message"] == "Input should be 'AVARIA', 'MANUTENCAO' or 'MULTA'"
 
 def test_create_ocorrencia_data_futura(client, ocorrencia_payload):
     """Teste: dataOcorrencia no futuro retorna 400."""
@@ -28,6 +29,7 @@ def test_create_ocorrencia_data_futura(client, ocorrencia_payload):
 
     assert response.status_code == 400
     assert response.get_json()["success"] is False
+    assert response.get_json()["message"] == "A data da ocorrência não pode ser no futuro"
 
 def test_create_ocorrencia_cep_invalido(client, ocorrencia_payload):
     """Teste: CEP com menos de 8 dígitos retorna 400."""
@@ -38,6 +40,7 @@ def test_create_ocorrencia_cep_invalido(client, ocorrencia_payload):
 
     assert response.status_code == 400
     assert response.get_json()["success"] is False
+    assert response.get_json()["message"] == "CEP inválido. Use o formato 99999999 ou 99999-999"
 
 def test_create_ocorrencia_cep_nao_encontrado(client, ocorrencia_payload, monkeypatch):
     """Teste: CEP no formato correto mas não encontrado retorna 400, sem stacktrace."""
@@ -54,6 +57,7 @@ def test_create_ocorrencia_cep_nao_encontrado(client, ocorrencia_payload, monkey
 
     assert response.status_code == 400
     assert response.get_json()["success"] is False
+    assert response.get_json()["message"] == f"CEP 01310100 não encontrado"
 
 def test_deletar_ocorrencia(client, ocorrencia_payload):
     """Teste: ocorrência é removida com sucesso e some da listagem."""
@@ -72,3 +76,4 @@ def test_deletar_ocorrencia_inexistente(client):
 
     assert resposta.status_code == 404
     assert resposta.get_json()["success"] is False
+    assert resposta.get_json()["message"] == "Ocorrência não encontrada"
