@@ -2,7 +2,7 @@
 
 import uuid
 
-from src.client.cep_client import consultar_cep, CepConsultaError
+from src.client.cep_client import consultar_cep
 from src.model import repository
 from src.model.schema.ocorrencia import OcorrenciaInputSchema
 
