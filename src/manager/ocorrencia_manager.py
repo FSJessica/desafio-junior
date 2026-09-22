@@ -7,6 +7,7 @@ from src.model import repository
 from src.model.schema.ocorrencia import OcorrenciaInputSchema
 
 def criar_ocorrencia(dados: OcorrenciaInputSchema) -> dict:
+    """Consulta o endereço do CEP, monta o registro e persiste a ocorrência."""
     endereco = consultar_cep(dados.cep)
 
     ocorrencia = {
@@ -28,7 +29,9 @@ def criar_ocorrencia(dados: OcorrenciaInputSchema) -> dict:
     return ocorrencia
 
 def listar_ocorrencias(placa: str) -> list[dict]:
+    """Retorna as ocorrências registradas para a placa informada."""
     return repository.listar_por_placa(placa)
 
 def deletar_ocorrencia(ocorrencia_id: str) -> bool:
+    """Remove a ocorrência com o id informado, se existir."""
     return repository.remover_por_id(ocorrencia_id)

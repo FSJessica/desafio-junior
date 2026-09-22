@@ -12,6 +12,7 @@ ocorrencia_bp = Blueprint("ocorrencia", __name__)
 
 @ocorrencia_bp.route("/ocorrencia", methods=["POST"])
 def criar_ocorrencia():
+    """Cria uma nova ocorrência de veículo, consultando o endereço via CEP."""
     try:
         dados = OcorrenciaInputSchema(**request.get_json())
     except ValidationError as erro:
@@ -27,11 +28,13 @@ def criar_ocorrencia():
 
 @ocorrencia_bp.route("/ocorrencia/<placa>", methods=["GET"])
 def listar_ocorrencias(placa):
+    """Lista as ocorrências registradas para a placa informada."""
     ocorrencias = ocorrencia_manager.listar_ocorrencias(placa)
     return json_response.success(ocorrencias, status=200)
 
 @ocorrencia_bp.route("/ocorrencia/<ocorrencia_id>", methods=["DELETE"])
 def deletar_ocorrencia(ocorrencia_id):
+    """Remove uma ocorrência pelo seu id."""
     removido = ocorrencia_manager.deletar_ocorrencia(ocorrencia_id)
 
     if not removido:
